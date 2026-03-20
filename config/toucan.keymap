@@ -4,16 +4,70 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define BASE 0
-#define NAV  1
-#define SYM  2
-#define ADJ  3
+#define MEDIA 1
+#define SYMBOLS 2
+#define NUMBERS 3
+#define NAV 4
+#define FUNCTION 5
+#define BLUETOOTH 6
+
+// tapping-term-ms
+#define TT 160
 
 / {
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <TT>;
+            quick-tap-ms = <0>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+        };
+        hmpt: homerow_mods_prefer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_PREFER_TAP";
+            #binding-cells = <2>;
+            tapping-term-ms = <TT>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+        blt: balanced_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "BALANCED_LAYER_TAP";
+            #binding-cells = <2>;
+            tapping-term-ms = <TT>;
+            quick-tap-ms = <0>;
+            flavor = "balanced";
+            bindings = <&mo>, <&kp>;
+        };
+        tt: toggle_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TOGGLE_LAYER_TAP";
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&tog>;
+        };
+    };
+
+    macros {
+        vi_editing_mode: vi_editing_mode {
+            label = "vi editing-mode";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp S &kp E &kp T &kp SPACE &kp MINUS &kp O &kp SPACE &kp V &kp I &kp RET>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        combo_vi_editing_mode {
+            timeout-ms = <50>;
+            key-positions = <27 28>;
+            bindings = <&vi_editing_mode>;
         };
     };
 
@@ -22,53 +76,92 @@
 
         base {
             display-name = "BASE";
-            bindings = <
-                &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-                &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-                &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                                &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  '    |  ,  |  .  |  P/Nav  |  Y  |                             |  F/Fn  |  G  |  C/Caps  |    R    |  L   |
+// A/Sym |  O/Ctrl  |  E/Alt [A->F13]? |  U/Cmd  |  I  |           |  D  |  H/Cmd  |  T/Alt  |    N/Ctrl    |  S/Sym |
+// Esc/Lsft|  Q/Click  |  J  |  K  |  X  |                               |  B  |  M  |  W  |    V    |Z/Rsft|
+// | Media/Play-Pause | Bspc/LC | SPC/Num/RC |                                                       | Ent | Tab |     |
+           bindings = <
+            &lt BLUETOOTH APOS &kp COMMA &kp DOT &blt NAV P &kp Y &lt FUNCTION F &kp G &hm CAPS C &kp R  &kp L
+            &blt SYMBOLS A &hm LCTRL O &hmpt LALT E &hm LCMD U &kp I &kp D &hm RCMD H &hmpt LALT T &hm RCTRL N &blt SYMBOLS S
+            &hm LSHFT ESC &blt CLICK Q &kp J &kp K &kp X &kp B &kp M &kp W &blt CLICK V &hm RSHFT Z
+            &tt C_PP MEDIA &kp BSPC &blt NUMBERS SPACE &kp RET &kp TAB &none
+            >;
+        };
+
+        symbols {
+            display-name = "SYM";
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  !  |  @  |  {  |  }  |     |                |         |    <    |    >   |  *  |   #  |
+//  ^  |  $  |  (  |  )  |  \  |                |    &    |    =    |    -   |  :  |   ;  |
+//  ~  |  `  |  [  |  ]  |     |                |         |    +    |    _   |  %  |   ?  |
+//         |  ,,  | |/&  | //\ |                |    "    |    `    |   ,,   |
+           bindings = <
+            &kp EXCL &hm LS(LCTRL) AT &hmpt LS(LALT) LBRC &hm LS(LCMD) RBRC &none &none &hm RS(RCMD) LT &hmpt RS(LALT) GT &hm RS(RCTRL) ASTERISK &hm LA(N3) HASH
+            &kp CARET &hm LCTRL DOLLAR &hmpt LALT LPAR &hm LCMD RPAR &kp BACKSLASH &kp AMPS &hm RCMD EQL &hmpt LALT MINUS &hm RCTRL COLON &kp SEMICOLON
+            &kp TILDE &kp GRAVE &kp LBKT &kp RBKT &none &none &kp PLUS &kp UNDERSCORE &kp PERCENT &kp QMARK
+            &trans &mt AMPS PIPE &mt BACKSLASH SLASH &kp DQT &kp GRAVE &none
+           >;
+        };
+
+        numbers {
+            display-name = "NUM";
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//   s-f5  |  s-f6  |  s-f7 |  s-f8  |   |            |         |    4/<    |    5/>   |  6/*  |   7//  |
+//    s-f1   |  s-f2 |  s-f3 | s-f4 |   |             |   DEL   |    0/=    |    1/-   | 2/: |   3/;  |
+//     s-f9   | s-f10 | s-f11 | s-f12 |   |           |         |    8/+    |    9/_   | +/- | *//  |
+//         |      |     |      |     |      |    .    |    =    |      |
+           bindings = <
+	    &kp LS(F5) &kp LS(F6) &kp LS(F7) &kp LS(F8) &none &none &hmpt LT N4 &hmpt GT N5 &hmpt ASTERISK N6 &hmpt SLASH N7
+	    &kp LS(F1) &kp LS(F2) &kp LS(F3) &kp LS(F4) &none &kp DEL &hmpt EQL N0 &hmpt MINUS N1 &hmpt COLON N2 &hmpt SEMICOLON N3
+	    &kp LS(F9) &kp LS(F10) &kp LS(F11) &kp LS(F12) &none &none &hmpt PLUS N8 &hmpt UNDERSCORE N9 &hmpt MINUS PLUS &hmpt SLASH ASTERISK
+	    &none &none &none &kp DOT &kp EQL &none
             >;
         };
 
         nav {
             display-name = "NAV";
-            bindings = <
-                &kp TAB     &kp N1          &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-                &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-                &kp LSHFT   &studio_unlock  &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                                &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//     |     |     |     |     |                |         |         |    ^   |     |      |
+//     |     |     |     |     |                |         |    <    |    v   |  >  |      |
+//     |     |     |     |     |                |         |   HOME  |        | END |      |
+//         |      |     |      |     |      |    PgDN   |   PgUP  |      |
+           bindings = <
+	    &none &none &none &none &none &none &none &kp UP &none &none
+	    &none &none &none &none &none &none &kp LEFT &kp DOWN &kp RIGHT &none
+	    &none &none &none &none &none &none &kp HOME &none &kp END &none
+	    &none &none &none &kp PG_DN &kp PG_UP &none
             >;
         };
 
-        sym {
-            display-name = "SYM";
-            bindings = <
-                &kp TAB   &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
-                &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp BSLH &kp GRAVE
-                &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp PIPE &kp TILDE
-                                          &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
+        fn {
+            display-name = "FN";
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  F5 |  F6 | F7  | F8  |     |                |         |         |        |     |      |
+//  F1 |  F2 | F3  | F4  | DEL |                |         |         |        |     |      |
+//  F9 | F10 | F11 | F12 |     |                |   ,,    |   ,,    |        |     |      |
+//         |      |     |      |     |      |           |         |      |
+           bindings = <
+            &kp F5 &kp F6 &kp F7 &kp F8 &none &none &none &none &none &none
+            &kp F1 &kp F2 &kp F3 &kp F4 &kp DEL &none &none &none &none &none
+            &kp F9 &kp F10 &kp F11 &kp F12 &none &none &none &none &none &none
+	    &none &none &none &none &none &none
             >;
         };
 
-        adj {
-            display-name = "ADJ";
-            bindings = <
-                &mo TAB   &trans &kp F7 &kp F8 &kp F9 &kp F12   &kp C_VOL_DN &kp C_MUTE  &kp C_VOL_UP &trans &trans &kp BSPC
-                &kp LCTRL &trans &kp F4 &kp F5 &kp F6 &kp F11   &trans       &trans      &trans       &trans &trans &trans
-                &bt LSHFT &trans &kp F1 &kp F2 &kp F3 &kp F10   &trans       &trans      &trans       &trans &trans &trans
-                                   &kp LGUI &mo NAV &kp SPACE   &kp RET &mo 2 &kp RALT
+        bt {
+            display-name = "BT";
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//     |     |     |     |     |                |         |         |        |     |      |
+//     |     |     |     |     |                |   P0    |    P1   |   P2   |  P3 |  P4  |
+//     |     |     |     |     |                | BT/USB  |         |        |     |      |
+//         | CLR  |     |      |
+           bindings = <
+            &none &none &none &none &none &none &none &none &none &none
+            &none &none &none &none &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
+            &none &none &none &none &none &out OUT_TOG &none &none &none &none
+	        &none &bt BT_CLR &none &none &none &none
             >;
-        };
-        extra_1 {
-                status = "reserved";
-        };
-
-        extra_2 {
-                status = "reserved";
-        };
-
-        extra_3 {
-                status = "reserved";
         };
     };
 };

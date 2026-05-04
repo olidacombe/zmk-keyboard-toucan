@@ -4,13 +4,12 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define BASE 0
-#define MEDIA 1
-#define SYMBOLS 2
-#define NUMBERS 3
-#define NAV 4
-#define FUNCTION 5
-#define BLUETOOTH 6
-#define CLICK 7
+#define SYMBOLS 1
+#define NUMBERS 2
+#define NAV 3
+#define FUNCTION 4
+#define BLUETOOTH 5
+#define CLICK 6
 
 #define LCLK 1
 #define RCLK 2

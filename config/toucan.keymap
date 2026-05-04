@@ -168,10 +168,10 @@
 
         click {
             bindings = <
-              &none &trans  &trans     &trans  &trans     &trans    &trans  &trans  &trans  &trans  &trans &none
+              &none &trans     &trans     &trans  &trans     &trans    &trans  &trans  &trans  &trans  &trans &none
               &none &kp LSHFT  &trans     &trans  &trans     &trans    &trans  &trans  &trans  &trans  &trans &none
               &none &kp LCTRL  &trans  &kp LALT  &kp LCMD    &trans    &trans  &trans  &trans  &trans  &trans &none
-              &trans  &mkp RCLK &mkp LCLK    &mkp LCLK  &mkp RCLK &trans
+              &trans &mkp MB2 &mkp MB1 &mkp MB1 &mkp MB2 &trans
             >;
         };
 

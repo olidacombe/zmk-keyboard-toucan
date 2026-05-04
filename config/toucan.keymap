@@ -10,6 +10,8 @@
 #define NAV 4
 #define FUNCTION 5
 #define BLUETOOTH 6
+#define CLICK 7
+
 
 // tapping-term-ms
 #define TT 160
@@ -163,5 +165,15 @@
 	          &none &bt BT_CLR &none &none &none &none
             >;
         };
+
+        click {
+            bindings = <
+              &none &trans  &trans     &trans  &trans     &trans    &trans  &trans  &trans  &trans  &trans &none
+              &none &kp LSHFT  &trans     &trans  &trans     &trans    &trans  &trans  &trans  &trans  &trans &none
+              &none &kp LCTRL  &trans  &kp LALT  &kp LCMD    &trans    &trans  &trans  &trans  &trans  &trans &none
+              &trans  &mkp RCLK &mkp LCLK    &mkp LCLK  &mkp RCLK
+            >;
+        };
+
     };
 };

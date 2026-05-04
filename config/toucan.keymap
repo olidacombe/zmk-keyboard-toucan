@@ -83,12 +83,12 @@
 //  '    |  ,  |  .  |  P/Nav  |  Y  |                             |  F/Fn  |  G  |  C/Caps  |    R    |  L   |
 // A/Sym |  O/Ctrl  |  E/Alt [A->F13]? |  U/Cmd  |  I  |           |  D  |  H/Cmd  |  T/Alt  |    N/Ctrl    |  S/Sym |
 // Esc/Lsft|  Q/Click  |  J  |  K  |  X  |                               |  B  |  M  |  W  |    V    |Z/Rsft|
-// | Media/Play-Pause | Bspc/LC | SPC/Num/RC |                                                       | Ent | Tab |     |
+// | | Bspc/LC | SPC/Num/RC |                                                       | Ent | Tab |     |
            bindings = <
               &none &lt BLUETOOTH APOS &kp COMMA &kp DOT &blt NAV P &kp Y &lt FUNCTION F &kp G &hm CAPS C &kp R  &kp L &none
               &none &blt SYMBOLS A &hm LCTRL O &hmpt LALT E &hm LCMD U &kp I &kp D &hm RCMD H &hmpt LALT T &hm RCTRL N &blt SYMBOLS S &none
               &none &hm LSHFT ESC &blt CLICK Q &kp J &kp K &kp X &kp B &kp M &kp W &blt CLICK V &hm RSHFT Z &none
-              &tt C_PP MEDIA &kp BSPC &blt NUMBERS SPACE &kp RET &kp TAB &none
+              &none &kp BSPC &blt NUMBERS SPACE &kp RET &kp TAB &none
             >;
         };
 

@@ -82,10 +82,10 @@
 // Esc/Lsft|  Q/Click  |  J  |  K  |  X  |                               |  B  |  M  |  W  |    V    |Z/Rsft|
 // | Media/Play-Pause | Bspc/LC | SPC/Num/RC |                                                       | Ent | Tab |     |
            bindings = <
-            &lt BLUETOOTH APOS &kp COMMA &kp DOT &blt NAV P &kp Y &lt FUNCTION F &kp G &hm CAPS C &kp R  &kp L
-            &blt SYMBOLS A &hm LCTRL O &hmpt LALT E &hm LCMD U &kp I &kp D &hm RCMD H &hmpt LALT T &hm RCTRL N &blt SYMBOLS S
-            &hm LSHFT ESC &blt CLICK Q &kp J &kp K &kp X &kp B &kp M &kp W &blt CLICK V &hm RSHFT Z
-            &tt C_PP MEDIA &kp BSPC &blt NUMBERS SPACE &kp RET &kp TAB &none
+              &none &lt BLUETOOTH APOS &kp COMMA &kp DOT &blt NAV P &kp Y &lt FUNCTION F &kp G &hm CAPS C &kp R  &kp L &none
+              &none &blt SYMBOLS A &hm LCTRL O &hmpt LALT E &hm LCMD U &kp I &kp D &hm RCMD H &hmpt LALT T &hm RCTRL N &blt SYMBOLS S &none
+              &none &hm LSHFT ESC &blt CLICK Q &kp J &kp K &kp X &kp B &kp M &kp W &blt CLICK V &hm RSHFT Z &none
+              &tt C_PP MEDIA &kp BSPC &blt NUMBERS SPACE &kp RET &kp TAB &none
             >;
         };
 
@@ -97,10 +97,10 @@
 //  ~  |  `  |  [  |  ]  |     |                |         |    +    |    _   |  %  |   ?  |
 //         |  ,,  | |/&  | //\ |                |    "    |    `    |   ,,   |
            bindings = <
-            &kp EXCL &hm LS(LCTRL) AT &hmpt LS(LALT) LBRC &hm LS(LCMD) RBRC &none &none &hm RS(RCMD) LT &hmpt RS(LALT) GT &hm RS(RCTRL) ASTERISK &hm LA(N3) HASH
-            &kp CARET &hm LCTRL DOLLAR &hmpt LALT LPAR &hm LCMD RPAR &kp BACKSLASH &kp AMPS &hm RCMD EQL &hmpt LALT MINUS &hm RCTRL COLON &kp SEMICOLON
-            &kp TILDE &kp GRAVE &kp LBKT &kp RBKT &none &none &kp PLUS &kp UNDERSCORE &kp PERCENT &kp QMARK
-            &trans &mt AMPS PIPE &mt BACKSLASH SLASH &kp DQT &kp GRAVE &none
+             &none &kp EXCL &hm LS(LCTRL) AT &hmpt LS(LALT) LBRC &hm LS(LCMD) RBRC &none &none &hm RS(RCMD) LT &hmpt RS(LALT) GT &hm RS(RCTRL) ASTERISK &hm LA(N3) HASH &none
+             &none &kp CARET &hm LCTRL DOLLAR &hmpt LALT LPAR &hm LCMD RPAR &kp BACKSLASH &kp AMPS &hm RCMD EQL &hmpt LALT MINUS &hm RCTRL COLON &kp SEMICOLON &none
+             &none &kp TILDE &kp GRAVE &kp LBKT &kp RBKT &none &none &kp PLUS &kp UNDERSCORE &kp PERCENT &kp QMARK &none
+             &trans &mt AMPS PIPE &mt BACKSLASH SLASH &kp DQT &kp GRAVE &none
            >;
         };
 
@@ -112,10 +112,10 @@
 //     s-f9   | s-f10 | s-f11 | s-f12 |   |           |         |    8/+    |    9/_   | +/- | *//  |
 //         |      |     |      |     |      |    .    |    =    |      |
            bindings = <
-	    &kp LS(F5) &kp LS(F6) &kp LS(F7) &kp LS(F8) &none &none &hmpt LT N4 &hmpt GT N5 &hmpt ASTERISK N6 &hmpt SLASH N7
-	    &kp LS(F1) &kp LS(F2) &kp LS(F3) &kp LS(F4) &none &kp DEL &hmpt EQL N0 &hmpt MINUS N1 &hmpt COLON N2 &hmpt SEMICOLON N3
-	    &kp LS(F9) &kp LS(F10) &kp LS(F11) &kp LS(F12) &none &none &hmpt PLUS N8 &hmpt UNDERSCORE N9 &hmpt MINUS PLUS &hmpt SLASH ASTERISK
-	    &none &none &none &kp DOT &kp EQL &none
+              &none &kp LS(F5) &kp LS(F6) &kp LS(F7) &kp LS(F8) &none &none &hmpt LT N4 &hmpt GT N5 &hmpt ASTERISK N6 &hmpt SLASH N7 &none
+              &none &kp LS(F1) &kp LS(F2) &kp LS(F3) &kp LS(F4) &none &kp DEL &hmpt EQL N0 &hmpt MINUS N1 &hmpt COLON N2 &hmpt SEMICOLON N3 &none
+              &none &kp LS(F9) &kp LS(F10) &kp LS(F11) &kp LS(F12) &none &none &hmpt PLUS N8 &hmpt UNDERSCORE N9 &hmpt MINUS PLUS &hmpt SLASH ASTERISK &none
+ 	          &none &none &none &kp DOT &kp EQL &none
             >;
         };
 
@@ -127,10 +127,10 @@
 //     |     |     |     |     |                |         |   HOME  |        | END |      |
 //         |      |     |      |     |      |    PgDN   |   PgUP  |      |
            bindings = <
-	    &none &none &none &none &none &none &none &kp UP &none &none
-	    &none &none &none &none &none &none &kp LEFT &kp DOWN &kp RIGHT &none
-	    &none &none &none &none &none &none &kp HOME &none &kp END &none
-	    &none &none &none &kp PG_DN &kp PG_UP &none
+        	  &none &none &none &none &none &none &none &none &none &kp UP &none &none &none
+        	  &none &none &none &none &none &none &none &none &kp LEFT &kp DOWN &kp RIGHT &none &none
+        	  &none &none &none &none &none &none &none &none &kp HOME &none &kp END &none &none
+              &none &none &none &kp PG_DN &kp PG_UP &none
             >;
         };
 
@@ -142,10 +142,10 @@
 //  F9 | F10 | F11 | F12 |     |                |   ,,    |   ,,    |        |     |      |
 //         |      |     |      |     |      |           |         |      |
            bindings = <
-            &kp F5 &kp F6 &kp F7 &kp F8 &none &none &none &none &none &none
-            &kp F1 &kp F2 &kp F3 &kp F4 &kp DEL &none &none &none &none &none
-            &kp F9 &kp F10 &kp F11 &kp F12 &none &none &none &none &none &none
-	    &none &none &none &none &none &none
+              &none &kp F5 &kp F6 &kp F7 &kp F8 &none &none &none &none &none &none &none
+              &none &kp F1 &kp F2 &kp F3 &kp F4 &kp DEL &none &none &none &none &none &none
+              &none &kp F9 &kp F10 &kp F11 &kp F12 &none &none &none &none &none &none &none
+	          &none &none &none &none &none &none
             >;
         };
 
@@ -157,10 +157,10 @@
 //     |     |     |     |     |                | BT/USB  |         |        |     |      |
 //         | CLR  |     |      |
            bindings = <
-            &none &none &none &none &none &none &none &none &none &none
-            &none &none &none &none &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
-            &none &none &none &none &none &out OUT_TOG &none &none &none &none
-	        &none &bt BT_CLR &none &none &none &none
+              &none &none &none &none &none &none &none &none &none &none &none &none
+              &none &none &none &none &none &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &none
+              &none &none &none &none &none &none &out OUT_TOG &none &none &none &none &none
+	          &none &bt BT_CLR &none &none &none &none
             >;
         };
     };

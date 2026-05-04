@@ -112,9 +112,9 @@
 //     |     |     |     |     |                |         |   HOME  |        | END |      |
 //         |      |     |      |     |      |    PgDN   |   PgUP  |      |
            bindings = <
-        	  &none &none &none &none &none &none &none &none &none &kp UP &none &none &none
-        	  &none &none &none &none &none &none &none &none &kp LEFT &kp DOWN &kp RIGHT &none &none
-        	  &none &none &none &none &none &none &none &none &kp HOME &none &kp END &none &none
+        	  &none &none &none &none &none &none &none &none &kp UP &none &none &none
+        	  &none &none &none &none &none &none &none &kp LEFT &kp DOWN &kp RIGHT &none &none
+        	  &none &none &none &none &none &none &none &kp HOME &none &kp END &none &none
               &none &none &none &kp PG_DN &kp PG_UP &none
             >;
         };

@@ -54,6 +54,7 @@ build_target() {
     local artifact="$2"
     local shield="${3:-}"
     local cmake="${4:-}"
+    local snippet="${5:-}"
 
     local build_dir="$WORKSPACE/build/${artifact}"
     local extra_args=()
@@ -61,6 +62,10 @@ build_target() {
 
     if [ -n "$shield" ]; then
         extra_args+=(-DSHIELD="$shield")
+    fi
+
+    if [ -n "$snippet" ]; then
+        extra_args+=(-DSNIPPET="$snippet")
     fi
 
     if [ -n "$cmake" ]; then
@@ -109,8 +114,9 @@ main() {
         artifact=$(echo "$line" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('artifact-name', d['board']))")
         shield=$(echo "$line"  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('shield',''))" 2>/dev/null || echo "")
         cmake=$(echo "$line"   | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('cmake-args',''))" 2>/dev/null || echo "")
+        snippet=$(echo "$line" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('snippet',''))" 2>/dev/null || echo "")
 
-        build_target "$board" "$artifact" "$shield" "$cmake"
+        build_target "$board" "$artifact" "$shield" "$cmake" "$snippet"
     done < <(parse_build_yaml)
 
     echo ""
